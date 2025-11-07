@@ -1,0 +1,56 @@
+{
+  "name": "@lagless/deterministic-math",
+  "version": "0.1.0",
+  "description": "Deterministic trig and quaternion math backed by Rust + WebAssembly with a friendly TypeScript API.",
+  "license": "MIT",
+  "main": "dist/lib/index.cjs",
+  "module": "dist/lib/index.mjs",
+  "types": "dist/lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "import": "./dist/lib/index.mjs",
+      "require": "./dist/lib/index.cjs"
+    },
+    "./wasm": {
+      "default": "./dist/pkg/det_math_wasm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/lib",
+    "dist/pkg",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:wasm": "wasm-pack build --target web --release --out-dir pkg",
+    "build:lib": "tsup",
+    "copy:pkg": "node scripts/copy-pkg.mjs",
+    "build:package": "npm run build:wasm && npm run build:lib && npm run copy:pkg",
+    "typecheck": "tsc --noEmit",
+    "build:web": "vite build",
+    "build": "npm run typecheck && npm run build:package && npm run build:web",
+    "dev": "vite build --watch",
+    "preview": "vite preview",
+    "release": "npm run build:package && npm version patch && npm publish --access public",
+    "prepublishOnly": "npm run build:package"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.8"
+  },
+  "keywords": [
+    "deterministic",
+    "math",
+    "wasm",
+    "rust",
+    "vec3",
+    "quaternion",
+    "trigonometry"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

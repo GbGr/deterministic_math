@@ -1,0 +1,75 @@
+﻿<!--
+  Determinism test usage:
+  1. Run `npm run build:wasm` when Rust changes and `npm install` to refresh the local wasm package.
+  2. Execute `npm run build` (Vite) so `dist/web/determinism-test.js` is current.
+  3. Serve the repo root or the `public` folder and open this file on any browser/device.
+  4. Pick a seed/iteration count below to control how much deterministic work is performed.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Deterministic Math Consistency Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 2rem;
+        background: #eef2f7;
+      }
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      }
+      pre {
+        min-height: 240px;
+        background: #111827;
+        color: #d1d5db;
+        padding: 1rem;
+        border-radius: 6px;
+        overflow: auto;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+      input {
+        padding: 0.5rem;
+        font-size: 1rem;
+        width: 16rem;
+        margin-bottom: 1rem;
+      }
+      button {
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Deterministic Math Consistency Test</h1>
+      <p>
+        Run this test on multiple browsers/devices. The summary includes hashes for both deterministic WASM math and
+        native JavaScript math so you can spot any divergence. Use the same seed and iteration count everywhere for
+        apples-to-apples comparisons.
+      </p>
+      <label for="determinism-seed">Seed (32-bit, accepts hex like 0x1234abcd):</label>
+      <input id="determinism-seed" type="text" value="" />
+      <label for="determinism-iterations">Iterations (higher takes longer but increases coverage):</label>
+      <input id="determinism-iterations" type="number" min="1" step="1000" value="" />
+      <div>
+        <button id="run-determinism-test" type="button">Run test</button>
+        <button id="copy-determinism-result" type="button">Copy summary</button>
+      </div>
+      <pre id="determinism-output">Waiting for WASM...</pre>
+    </main>
+    <script type="module" src="../dist/web/determinism-test.js"></script>
+  </body>
+</html>

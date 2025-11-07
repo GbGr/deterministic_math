@@ -1,0 +1,58 @@
+﻿<!--
+  Benchmark usage:
+  1. Run `npm run build:wasm` when Rust code changes and then `npm install` to refresh the local wasm package.
+  2. Execute `npm run build` (Vite) so `dist/web/benchmark.js` is up to date.
+  3. Serve the repo root or just this `public` folder (for example `npx serve .`) and open this file.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Deterministic Math Benchmark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 2rem;
+        background: #f5f5f5;
+      }
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      }
+      button {
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+      }
+      pre {
+        min-height: 200px;
+        background: #111;
+        color: #0f0;
+        padding: 1rem;
+        overflow: auto;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Deterministic Math Benchmark</h1>
+      <p>
+        Compare deterministic WASM trig functions against native JavaScript math. Each run uses the same
+        deterministic dataset so the results are easy to reproduce.
+      </p>
+      <div>
+        <button id="run-native" type="button">Run native Math benchmark</button>
+        <button id="run-wasm" type="button">Run WASM benchmark</button>
+      </div>
+      <pre id="benchmark-output">Preparing...</pre>
+    </main>
+    <script type="module" src="../dist/web/benchmark.js"></script>
+  </body>
+</html>
