@@ -2,6 +2,7 @@
 /tmp
 /out-tsc
 /dist
+/pkg/*
 
 /target
 /node_modules

@@ -1,6 +1,6 @@
 {
   "name": "@lagless/deterministic-math",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "description": "Deterministic trig and quaternion math backed by Rust + WebAssembly with a friendly TypeScript API.",
   "license": "MIT",
   "main": "dist/lib/index.cjs",
@@ -18,8 +18,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/lib",
     "dist/pkg",
+    "dist/lib",
     "README.md",
     "LICENSE"
   ],
@@ -28,9 +28,11 @@
     "build:lib": "tsup",
     "copy:pkg": "node scripts/copy-pkg.mjs",
     "build:package": "npm run build:wasm && npm run build:lib && npm run copy:pkg",
+    "docs:sync": "node scripts/copy-web.mjs",
+    "docs": "npm run build:web && npm run docs:sync",
     "typecheck": "tsc --noEmit",
     "build:web": "vite build",
-    "build": "npm run typecheck && npm run build:package && npm run build:web",
+    "build": "npm run typecheck && npm run build:package && npm run build:web && npm run docs:sync",
     "dev": "vite build --watch",
     "preview": "vite preview",
     "release": "npm run build:package && npm version patch && npm publish --access public",

@@ -21,7 +21,15 @@ async function main() {
 
   await rm(target, { recursive: true, force: true });
   await mkdir(resolve(root, "dist"), { recursive: true });
-  await cp(source, target, { recursive: true });
+
+  await cp(source, target, {
+    recursive: true,
+    filter: (src) => {
+      // Skip .gitignore inside pkg so npm does not ignore built artifacts
+      return !src.endsWith(".gitignore");
+    },
+  });
+
   console.log(`[copy:pkg] Copied ${source} -> ${target}`);
 }
 
