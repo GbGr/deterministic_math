@@ -6,6 +6,7 @@
   "main": "dist/lib/index.cjs",
   "module": "dist/lib/index.mjs",
   "types": "dist/lib/index.d.ts",
+  "repository": "https://github.com/GbGr/deterministic_math",
   "exports": {
     ".": {
       "types": "./dist/lib/index.d.ts",
